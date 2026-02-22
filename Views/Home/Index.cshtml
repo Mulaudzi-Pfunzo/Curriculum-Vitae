@@ -1,0 +1,130 @@
+﻿@model CVProject.Models.PortfolioViewModel
+
+@{
+    ViewData["Title"] = "Pfunzo Mulaudzi | Portfolio";
+}
+
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%);
+        color: white;
+        padding: 80px 0;
+    }
+    .skill-badge {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        color: #333;
+        transition: all 0.3s;
+    }
+    .skill-badge:hover {
+        background-color: #0d6efd;
+        color: white;
+    }
+    .project-card {
+        border-left: 5px solid #0d6efd;
+        transition: transform 0.2s;
+    }
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .avatar-circle {
+        width: 120px;
+        height: 120px;
+        background: #0d6efd;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        font-weight: bold;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+    }
+</style>
+
+<header class="hero-section text-center">
+    <div class="container">
+        <div class="avatar-circle">PM</div>
+        <h1 class="display-3 fw-bold">@Model.FullName</h1>
+        <p class="lead fs-3">@Model.ProfessionalTitle</p>
+        <div class="mt-4">
+            <a href="mailto:@Model.Email" class="btn btn-primary px-4 me-2">Hire Me</a>
+            <a href="#projects" class="btn btn-outline-light px-4">View Work</a>
+        </div>
+    </div>
+</header>
+
+<main class="container my-5">
+    <div class="row g-5">
+        <div class="col-lg-4">
+            <div class="sticky-top" style="top: 20px;">
+                <section class="mb-5">
+                    <h4 class="fw-bold text-uppercase small text-primary">About Me</h4>
+                    <p class="text-muted">
+                        Final-year Bachelor of Computer and Information Science student specializing in Application Development.
+                        I combine technical proficiency in <strong>ASP.NET</strong> with a deep passion for <strong>Data Science</strong> and stock market analysis.
+                    </p>
+                </section>
+
+                <section class="mb-5">
+                    <h4 class="fw-bold text-uppercase small text-primary">Core Skills</h4>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge skill-badge p-2">C#</span>
+                        <span class="badge skill-badge p-2">Python</span>
+                        <span class="badge skill-badge p-2">Java</span>
+                        <span class="badge skill-badge p-2">ASP.NET MVC</span>
+                        <span class="badge skill-badge p-2">Entity Framework</span>
+                        <span class="badge skill-badge p-2">NumPy/Seaborn</span>
+                        <span class="badge skill-badge p-2">Azure</span>
+                        <span class="badge skill-badge p-2">Agile</span>
+                    </div>
+                </section>
+
+                <section class="mb-5">
+                    <h4 class="fw-bold text-uppercase small text-primary">Education</h4>
+                    <p class="mb-1 fw-bold">B.CIS in App Development</p>
+                    <p class="text-muted small">Expected Graduation: 2025</p>
+                    <p class="mb-0 fw-bold small">Python Specialization</p>
+                    <p class="text-muted small">Coursera / University of Michigan</p>
+                </section>
+
+                <section>
+                    <h4 class="fw-bold text-uppercase small text-primary">Interests</h4>
+                    <p class="text-muted">📈 Stock Market Analysis<br>🏋️‍♂️ Fitness & Bodybuilding</p>
+                </section>
+            </div>
+        </div>
+
+        <div class="col-lg-8" id="projects">
+            <h4 class="fw-bold text-uppercase small text-primary mb-4">Featured Portfolio Projects</h4>
+
+            @foreach (var project in Model.Projects)
+            {
+                <div class="card project-card mb-4 border-0 bg-white shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h3 class="h5 fw-bold">@project.Title</h3>
+                            <span class="badge bg-light text-primary border border-primary">GitHub</span>
+                        </div>
+                        <p class="text-muted small mb-2">@project.TechStack</p>
+                        <p class="card-text">@project.Description</p>
+                        <div class="bg-light p-3 rounded mb-3">
+                            <strong class="small text-dark">Technical Highlight:</strong>
+                            <p class="small mb-0">@project.KeyAchievement</p>
+                        </div>
+                        <a href="@project.GitHubUrl" target="_blank" class="btn btn-sm btn-dark">Source Code & Documentation</a>
+                    </div>
+                </div>
+            }
+
+            <div class="text-center mt-5 py-4 border-top" id="contact">
+                <h4 class="fw-bold">Let's Connect</h4>
+                <p class="text-muted">@Model.Location</p>
+                <p class="fw-bold">@Model.Email</p>
+                <button onclick="window.print()" class="btn btn-outline-secondary btn-sm mt-3">Download as PDF / Print</button>
+            </div>
+        </div>
+    </div>
+</main>
